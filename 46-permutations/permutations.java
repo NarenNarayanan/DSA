@@ -10,7 +10,6 @@ class Solution {
                 ds.add(nums[i]);
                 help(nums,arr,result,ds);
                 ds.remove(ds.size()-1);
-                help(nums,arr,result,ds);
                 arr[i]=false;
             }
         }
