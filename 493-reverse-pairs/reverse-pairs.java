@@ -1,21 +1,24 @@
 class Solution {
-    int count=0;
-    public void countPair(int [] arr, int left, int mid, int right){
+    public int countPair(int [] arr, int left, int mid, int right){
+        int count=0;
         int ptr=mid+1;
         for(int i=left;i<=mid;i++){
             while(ptr<=right && (long)arr[i] > 2L*arr[ptr])ptr++;
             count = count + (ptr-(mid+1));
         }
+        return count;
     }
-    public void mergesort(int [] arr,int left, int right){
+    public int mergesort(int [] arr,int left, int right){
+        int count=0;
         if(left<right){
             int mid=(left+right)/2;
 
-            mergesort(arr,left,mid);
-            mergesort(arr,mid+1,right);
-            countPair(arr,left,mid,right);
+            count+=mergesort(arr,left,mid);
+            count+=mergesort(arr,mid+1,right);
+            count+=countPair(arr,left,mid,right);
             merge(arr,left,mid,right);
         }
+        return count;
     }
     public void merge(int [] arr, int left, int mid, int right){
         int n1=mid-left+1;
@@ -49,7 +52,7 @@ class Solution {
     }
     public int reversePairs(int[] nums) {
         int left=0,right=nums.length-1;
-        mergesort(nums,left,right);
+        int count=mergesort(nums,left,right);
         return count;
     }
 }
