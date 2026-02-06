@@ -13,17 +13,19 @@ class Solution {
         map.put('7',"pqrs");
         map.put('8',"tuv");
         map.put('9',"wxyz");
-        backtrack(0,digits,map,"",result);
+        backtrack(0,digits,map,new StringBuilder(),result);
         return result;
     }
-    public void backtrack(int i,String digits,Map<Character,String> map,String curr,List<String> result){
+    public void backtrack(int i,String digits,Map<Character,String> map,StringBuilder curr,List<String> result){
         if(i==digits.length()){
-            result.add(curr);
+            result.add(curr.toString());
             return;
         }
         String letters=map.get(digits.charAt(i));
         for(char c: letters.toCharArray()){
-            backtrack(i+1,digits,map,curr+c,result);
+            curr.append(c);
+            backtrack(i+1,digits,map,curr,result);
+            curr.deleteCharAt(curr.length()-1);
         }
     }
 }
