@@ -3,23 +3,18 @@ class Solution {
         List<Integer> result=new ArrayList<>();
         int k=p.length();
         int left=0;
-        HashMap<Character, Integer> freq = new HashMap<>();
-        for(int i=0;i<p.length();i++){
-            freq.put(p.charAt(i),freq.getOrDefault(p.charAt(i),0)+1);
+        int[] pfreq=new int[26];
+        int[] win=new int[26];
+        for(int i=0;i<k;i++){
+            pfreq[p.charAt(i)-'a']++;
         }
         for(int right=0;right<s.length();right++){
-            freq.put(s.charAt(right),freq.getOrDefault(s.charAt(right),0)-1);
-            if (freq.get(s.charAt(right)) == 0) {
-                    freq.remove(s.charAt(right));
-            };
-            while((right-left+1) > k){
-                freq.put(s.charAt(left),freq.getOrDefault(s.charAt(left),0)+1);
-                if (freq.get(s.charAt(left)) == 0) {
-                    freq.remove(s.charAt(left));
-                };
+            win[s.charAt(right)-'a']++;
+            if(right-left+1 > k){
+                win[s.charAt(left)-'a']--;
                 left++;
             }
-            if((right-left+1== k) && freq.isEmpty()){
+            if(right-left+1 ==k && Arrays.equals(win,pfreq)){
                 result.add(left);
             }
         }
