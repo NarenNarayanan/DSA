@@ -1,17 +1,4 @@
 class Solution {
-    int count=0;
-    public void dfsCount(int row,int col,int[][] grid){
-        if(row<0 || col<0 || row>=grid.length || col>=grid[0].length)return;
-        if(grid[row][col]==1){
-            grid[row][col]=0;
-            count++;
-            dfsCount(row+1,col,grid);
-            dfsCount(row-1,col,grid);
-            dfsCount(row,col+1,grid);
-            dfsCount(row,col-1,grid);
-        }
-        else return;
-    }
     public int numEnclaves(int[][] grid) {
         int m=grid.length;
         int n=grid[0].length;
@@ -22,10 +9,11 @@ class Solution {
                 }
             }
         }
+        int count=0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j]==1){
-                    dfsCount(i,j,grid);
+                    count++;
                 }
             }
         }
