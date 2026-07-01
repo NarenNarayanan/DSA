@@ -18,7 +18,6 @@ class MyQueue {
         }
         return outstack.pop();
     }
-    
     public int peek() {
         if(outstack.isEmpty()){
             while(!instack.isEmpty()){
