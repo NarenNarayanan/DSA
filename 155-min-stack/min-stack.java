@@ -1,19 +1,23 @@
 class MinStack {
     Stack<Integer> stack;
-    PriorityQueue<Integer> min;
+    Stack<Integer> minstack;
+    int min=Integer.MAX_VALUE;
     public MinStack() {
         stack=new Stack<>();
-        min=new PriorityQueue<>();
+        minstack=new Stack<>();
     }
 
     public void push(int value) {
+        min=Math.min(min,value);
+        minstack.push(min);
         stack.push(value);
-        min.offer(value);
     }
     
     public void pop() {
         int no=stack.pop();
-        min.remove(no);
+        minstack.pop();
+        if(!minstack.isEmpty())min=minstack.peek();
+        else min=Integer.MAX_VALUE;
     }
     
     public int top() {
@@ -21,7 +25,7 @@ class MinStack {
     }
     
     public int getMin() {
-        return min.peek();
+        return minstack.peek();
     }
 }
 
