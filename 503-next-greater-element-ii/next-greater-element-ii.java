@@ -8,7 +8,9 @@ class Solution {
             while(!stack.isEmpty() && nums[i]>nums[stack.peek()]){
                 ans[stack.pop()]=nums[i];
             }
-            stack.push(i);
+            if(cnt<nums.length){
+                stack.push(i);
+            }
             cnt++;
             if(cnt==nums.length*2)break;
         }
