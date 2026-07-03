@@ -1,20 +1,19 @@
 class MinStack {
     Stack<Integer> stack;
     Stack<Integer> minstack;
-    int min=Integer.MAX_VALUE;
     public MinStack() {
         stack=new Stack<>();
         minstack=new Stack<>();
     }
-
+    
     public void push(int value) {
         stack.push(value);
-        if(minstack.isEmpty())minstack.push(value);
-        else minstack.push(Math.min(value,minstack.peek()));
+        if(!minstack.isEmpty())minstack.push(Math.min(value,minstack.peek()));
+        else minstack.push(value);
     }
     
     public void pop() {
-        int no=stack.pop();
+        int out=stack.pop();
         minstack.pop();
     }
     
