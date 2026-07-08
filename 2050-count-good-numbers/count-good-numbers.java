@@ -10,7 +10,7 @@ class Solution {
         if(n==0)return 1;
         if(n==1)return x;
         long half=power(x,n/2);
-        long ans=(half*half)%MOD;
+        long ans=(half*half);
         if(n%2==0)return (ans)%MOD;
         return (ans*x)%MOD;
     }
