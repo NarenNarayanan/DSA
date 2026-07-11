@@ -1,17 +1,17 @@
 class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> ans=new ArrayList<>();
-        help(0,nums,ans,new ArrayList<>(),nums.length);
-        return ans;
-    }
-    public void help(int index,int[] nums,List<List<Integer>> ans,List<Integer> list,int n){
-        if(index>=n){
+    public void help(List<List<Integer>> ans,List<Integer> list,int[] nums,int index){
+        if(index>=nums.length){
             ans.add(new ArrayList<>(list));
             return;
         }
         list.add(nums[index]);
-        help(index+1,nums,ans,list,n);
+        help(ans,list,nums,index+1);
         list.remove(list.size()-1);
-        help(index+1,nums,ans,list,n);
+        help(ans,list,nums,index+1);
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans= new ArrayList<>();
+        help(ans,new ArrayList<>(),nums,0);
+        return ans;
     }
 }
