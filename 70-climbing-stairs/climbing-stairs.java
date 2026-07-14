@@ -1,13 +1,14 @@
 class Solution {
-    public int dphelp(int n,int [] dp){
-        if(n<=2)return n;
+    public int help(int n,int[] dp){
         if(dp[n]!=-1)return dp[n];
-        dp[n]=dphelp(n-1,dp)+dphelp(n-2,dp);
+        dp[n]=help(n-1,dp)+help(n-2,dp);
         return dp[n];
     }
     public int climbStairs(int n) {
-     int [] arr=new int[n+1];
-     Arrays.fill(arr,-1);
-     return dphelp(n,arr);   
+        int[] dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        dp[0]=1;
+        dp[1]=1;
+        return help(n,dp);
     }
 }
