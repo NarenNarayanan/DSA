@@ -1,12 +1,4 @@
 class Solution {
-    public int help(int row,int col,int m,int n,int[][] dp){
-        if(row>=m || col>=n)return 0;
-        if(row==m-1 && col==n-1)return 1;
-        if(dp[row][col]!=-1)return dp[row][col];
-        int right=help(row,col+1,m,n,dp);
-        int down=help(row+1,col,m,n,dp);
-        return dp[row][col]=right+down;
-    }
     public int uniquePaths(int m, int n) {
         int[][] dp=new int[m][n+1];
         dp[m-1][n-1]=1;
@@ -19,7 +11,6 @@ class Solution {
                     right = dp[row][col+1];
                 if(row+1 < m)
                     down = dp[row+1][col];
-
                 dp[row][col] = right + down;
             }
         }
