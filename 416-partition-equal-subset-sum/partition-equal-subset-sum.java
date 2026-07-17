@@ -1,20 +1,22 @@
 class Solution {
-    public boolean help(int[] nums,int index,int target,Boolean[][] dp){
-        if(index<0)return false;
-        if(target==0)return true;
-        if(index==0 && nums[index]==target)return true;
-        if(dp[index][target]!=null)return dp[index][target];
-        boolean notTake=help(nums,index-1,target,dp);
-        boolean take=false;
-        if(nums[index]<=target)take=help(nums,index-1,target-nums[index],dp);
-        dp[index][target] = take || notTake;
-        return dp[index][target];
-    }
     public boolean canPartition(int[] nums) {
         int sum=0;
         for(int num : nums)sum+=num;
         if(sum%2!=0)return false;
-        Boolean[][] dp=new Boolean[nums.length][sum/2 + 1];
-        return help(nums,nums.length-1,sum/2,dp);
+        int n=nums.length,target=sum/2;
+        boolean[][] dp=new boolean[nums.length][target + 1];
+        for(int i=0;i<nums.length;i++){
+            dp[i][0]=true;
+        }
+        if(nums[0]<=target)dp[0][nums[0]]=true;
+        for(int i=1;i<nums.length;i++){
+            for(int j=1;j<=target;j++){
+                boolean notTake=dp[i-1][j];
+                boolean take=false;
+                if(nums[i]<=j)take=dp[i-1][j-nums[i]];
+                dp[i][j]=take || notTake;
+            }
+        }
+        return dp[n-1][target];
     }
 }
