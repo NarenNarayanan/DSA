@@ -14,10 +14,21 @@ class Solution {
         }
     }
     public int maxProfit(int[] prices) {
-        int[][] dp=new int[prices.length][2];
-        for(int[] arr : dp){
-            Arrays.fill(arr,-1);
+        int[][] dp=new int[prices.length+1][2];
+        for(int index=prices.length-1;index>=0;index--){
+            for(int buy=0;buy<2;buy++){
+                if(buy==0){
+                    int skip=dp[index+1][buy];
+                    int take=-prices[index]+dp[index+1][1];
+                    dp[index][buy]=Math.max(skip,take);
+                }
+                else{
+                    int skip=dp[index+1][buy];
+                    int take=prices[index]+dp[index+1][0];
+                    dp[index][buy]=Math.max(skip,take);
+                }
+            }
         }
-        return help(prices,0,0,dp);
+        return dp[0][0];
     }
 }
