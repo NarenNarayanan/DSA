@@ -12,7 +12,7 @@ class Solution {
             int take=prices[index]+help(prices,index+2,0,dp);
             return dp[index][buy]=Math.max(skip,take);
         }
-    }
+    }   
     public int maxProfit(int[] prices) {
         int[][] dp=new int[prices.length][2];
         for(int[] arr : dp){
