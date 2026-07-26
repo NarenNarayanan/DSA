@@ -32,7 +32,6 @@ class Solution {
         int insert = solve(s1, s2, i, j - 1);
         int delete = solve(s1, s2, i - 1, j);
         int replace = solve(s1, s2, i - 1, j - 1);
-
         return dp[i][j] = 1 + Math.min(insert, Math.min(delete, replace));
     }
 }
